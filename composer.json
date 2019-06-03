@@ -1,0 +1,66 @@
+{
+    "name": "pley/toybox",
+    "description": "Pley's ToyBox",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/EasyPost/easypost-php"
+        }
+
+    ],
+    "require": {
+        "laravel/framework": "4.2.*",
+        "barryvdh/laravel-cors": "0.2.x",
+        "easypost/easypost-php": "^3.1",
+        "pragmarx/zipcode": "~1.0",
+        "aws/aws-sdk-php-laravel": "1.*",
+        "intervention/image": "*",
+        "aws/aws-sdk-php": "2.8.10",
+        "monolog/monolog": "*",
+        "hisorange/browser-detect": "1.*",
+        "jenssegers/agent": "^2.3",
+        "stripe/stripe-php": "^3.9",
+	    "guzzlehttp/guzzle": "~6",
+	    "alphazygma/usps-zonechart-php": "~1",
+	    "alphazygma/hatchbuck-php": "dev-master",
+        "doctrine/annotations": "^1.2",
+        "delighted/delighted": "1.*",
+        "vlucas/phpdotenv": "1.*",
+        "paypal/rest-api-sdk-php": "^1.12",
+        "sentry/sentry-laravel": "^0.8.0",
+        "paypal/merchant-sdk-php": "3.8.*",
+        "league/csv": "^8.0"
+    },
+    "autoload": {
+        "classmap": [
+            "app/commands",
+            "app/controllers",
+            "app/models",
+            "app/helpers",
+            "app/library",
+            "app/tests/TestCase.php",
+            "app/tests/TestCaseNoDB.php"
+        ],
+        "files": ["app/helpers.php"]
+    },
+    "scripts": {
+        "pre-install-cmd": [
+            "php artisan clear-compiled"
+        ],
+        "post-install-cmd": [
+            "php artisan optimize"
+        ],
+        "post-update-cmd": [
+            "php artisan clear-compiled",
+	        "php artisan optimize",
+            "php artisan pleyInit:EntityAnnotationPrecompile",
+            "php artisan migrate --force"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "stable"
+}

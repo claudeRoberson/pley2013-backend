@@ -1,0 +1,32 @@
+version: '2'
+services:
+   web:
+     image: webdevops/php-nginx-dev:ubuntu-15.10
+     volumes:
+       - .:/app
+     ports:
+       - "8080:80"
+     links:
+       - mysqldb
+     hostname: pley-web-dev
+     restart: always
+     environment:
+       WEB_DOCUMENT_ROOT: /app/public
+       XDEBUG_REMOTE_CONNECT_BACK: "0"
+       XDEBUG_REMOTE_HOST: "10.0.75.1"
+   mysqldb:
+     image: mysql:5.6
+     ports:
+       - "3307:3306"
+     volumes:
+       - mysql:/var/lib/mysql
+     environment:
+       MYSQL_ROOT_PASSWORD: password
+       MYSQL_DATABASE: docker_db
+       MYSQL_USER: mysql_usr
+       MYSQL_PASSWORD: mysql_pass
+
+### Volumes Setup ###########################################
+volumes:
+    mysql:
+        driver: "local"

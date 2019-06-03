@@ -1,0 +1,10 @@
+.DS_Store
+vendor/*
+composer.lock
+public/local_cdn/
+.idea/
+/nbproject/private/
+log/
+/app/config/local/nat-geo.php
+misc_queries/*
+.env
